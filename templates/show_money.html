@@ -5,17 +5,21 @@
 {% block content %}
 <main>
   <div id="content">
-    <h1>使用額一覧</h1>
-      {% for money in moneys[0] %}
-        <p>{{ money.title }} | {{ money.money }}円 | {{ money.note }}</p>
-      {% endfor %}
 
-    <form method="POST" action="{{ url_for("add_money") }}">
-      <input type="text" name="title">
-      <input type="number" name="money">
-      <textarea name="note"></textarea>
-      <button type="submit">送信</button>
-    </form>
+    <button class="add_money">新規追加</button>
+
+    {% for money in moneys[0] %}
+    <div class="row">
+      <div class="content_flex">
+        <span class="title">{{ money.title }}</span>
+        <span class="money">{{ money.money }}円</span>
+      </div>
+      {% if money.note != "" %}
+        <p class="more_area">{{ money.note }}</p>
+        <button class="open_tab"><i class="fa fa-angle-down fa-lg" aria-hidden="ture"></i></button>
+      {% endif %}
+    </div>
+    {% endfor %}
   </div>
 </main>
 {% endblock %}
