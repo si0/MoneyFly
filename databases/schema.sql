@@ -3,7 +3,7 @@ create table mf_money (
     category integer not null,
     money integer not null,
     note text,
-    datetime date not null default 'now',
+    art_date date not null default 'now',
     created timestamp not null default 'now'
 );
 

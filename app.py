@@ -1,5 +1,6 @@
 import os
 import config
+from datetime import date
 from sqlalchemy import create_engine, text
 from flask import Flask, g, request, flash, url_for, redirect, render_template
 
@@ -41,10 +42,17 @@ def after_request(response):
     return response
 
 
+############################################
+# トップページ / 過去の料金の表示
+############################################
 @app.route("/")
 def show_money():
     moneys = [[]]
-    rows = g.db.execute("SELECT id, title, money, note, datetime FROM moneyfly ORDER BY id DESC LIMIT 5")
+    rows = g.db.execute("SELECT \
+                         cate.category, money.money, money.note, money.art_date \
+                         FROM mf_money money, mf_category cate \
+                         WHERE money.category = cate.id \
+                         ORDER BY money.id DESC LIMIT 5")
 
     # 使用額を取得
     for row in rows.fetchall():
@@ -54,26 +62,39 @@ def show_money():
         else:
             note = row["note"]
 
-        moneys[0].append({"id": row["id"],
-                          "title": row["title"],
+        moneys[0].append({"category": row["category"],
                           "money": row["money"],
                           "note": note,
-                          "date": row["datetime"]})
+                          "art_date": row["art_date"]})
 
     # 合計使用額を取得
-    row = g.db.execute("SELECT sum(money) FROM moneyfly")
+    row = g.db.execute("SELECT sum(money) FROM mf_money")
     moneys.append({"summoney": row.fetchone()[0]})
 
     return render_template("show_money.html", moneys=moneys)
 
 
+############################################
+# 料金追加ページ / 料金の追加
+############################################
 @app.route("/add_money", methods=["POST", "GET"])
 def add_money():
     # 直接のアクセスの場合はadd_money.htmlを開く
     if request.method == "GET":
-        return render_template("add_money.html")
+        insert = [[], []]
 
-    if not request.form["title"] or not request.form["money"]:
+        # カテゴリーレコードの取得
+        rows = g.db.execute("SELECT id, category FROM mf_category")
+        for row in rows.fetchall():
+            insert[0].append({"id": row["id"],
+                         "category": row["category"]})
+        # 今日の日付を取得
+        value = date.today()
+        insert[1].append(value.strftime("%Y-%m-%d"))
+
+        return render_template("add_money.html", insert=insert)
+
+    if not request.form["category"] or not request.form["money"]:
         flash("投稿内容が誤っています")
         return redirect(url_for("add_money"))
 
@@ -84,19 +105,22 @@ def add_money():
         note_value = request.form["note"]
 
     # データ挿入SQLの実行
-    sql = text("INSERT INTO moneyfly \
-                (title, money, note, datetime) VALUES \
-                (:title, :money, :note, :datetime)")
+    sql = text("INSERT INTO mf_money \
+                (category, money, note, art_date) VALUES \
+                (:category, :money, :note, :art_date)")
     g.db.execute(sql,
-                 title = request.form["title"],
+                 category = request.form["category"],
                  money = request.form["money"],
                  note = note_value,
-                 datetime = request.form["datetime"])
+                 art_date = request.form["art_date"])
     flash("投稿が完了しました")
 
     return redirect(url_for("show_money"))
 
 
+############################################
+# 設定ページ / システムの設定
+############################################
 @app.route("/sys_config", methods=["POST", "GET"])
 def sys_config():
     return redirect(url_for("show_money"))
