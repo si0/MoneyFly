@@ -67,11 +67,15 @@ def show_money():
     return render_template("show_money.html", moneys=moneys)
 
 
-@app.route("/add_money", methods=["POST"])
+@app.route("/add_money", methods=["POST", "GET"])
 def add_money():
+    # 直接のアクセスの場合はadd_money.htmlを開く
+    if request.method == "GET":
+        return render_template("add_money.html")
+
     if not request.form["title"] or not request.form["money"]:
         flash("投稿内容が誤っています")
-        return redirect(url_for("show_money"))
+        return redirect(url_for("add_money"))
 
     # 備考が記入されていない場合はNoneとする
     if request.form["note"] == "":
@@ -81,15 +85,17 @@ def add_money():
 
     # データ挿入SQLの実行
     sql = text("INSERT INTO moneyfly \
-                (title, money, note) VALUES \
-                (:title, :money, :note)")
+                (title, money, note, datetime) VALUES \
+                (:title, :money, :note, :datetime)")
     g.db.execute(sql,
                  title = request.form["title"],
                  money = request.form["money"],
-                 note = note_value)
+                 note = note_value,
+                 datetime = request.form["datetime"])
     flash("投稿が完了しました")
 
     return redirect(url_for("show_money"))
+
 
 if __name__ == "__main__":
     app.run()

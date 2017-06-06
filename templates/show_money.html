@@ -4,22 +4,22 @@
 
 {% block content %}
 <main>
-  <div id="content">
 
+  <a href="{{ url_for("add_money") }}">
     <button class="add_money">新規追加</button>
+  </a>
 
-    {% for money in moneys[0] %}
-    <div class="row">
-      <div class="content_flex">
-        <span class="title">{{ money.title }}</span>
-        <span class="money">{{ money.money }}円</span>
-      </div>
-      {% if money.note != "" %}
-        <p class="more_area">{{ money.note }}</p>
-        <button class="open_tab"><i class="fa fa-angle-down fa-lg" aria-hidden="ture"></i></button>
-      {% endif %}
+  {% for money in moneys[0] %}
+  <div class="row">
+    <div class="content_flex">
+      <span class="title">{{ money.title }}</span>
+      <span class="money">{{ money.money }}円</span>
     </div>
-    {% endfor %}
+    {% if money.note != "" %}
+      <p class="more_area">{{ money.note }}</p>
+      <button class="open_tab"><i class="fa fa-angle-down fa-lg" aria-hidden="ture"></i></button>
+    {% endif %}
   </div>
+  {% endfor %}
 </main>
 {% endblock %}
