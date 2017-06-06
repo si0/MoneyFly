@@ -6,7 +6,7 @@
 <main>
   <div class="add_wrapper">
     <div class="add_formarea">
-      <form action="{{ url_for("add_money") }}" method="POST">
+      <form action="{{ url_for('add_money') }}" method="POST">
         <p>タイトル</p>
         <input class="inp" type="text" name="title" required>
         <p>金額</p>
@@ -20,5 +20,10 @@
       </form>
     </div>
   </div>
+
+  <a class="btn back" href="{{ url_for('show_money') }}">
+    戻る
+  </a>
+
 </main>
 {% endblock %}

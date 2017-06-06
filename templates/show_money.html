@@ -4,10 +4,12 @@
 
 {% block content %}
 <main>
-
-  <a href="{{ url_for("add_money") }}">
-    <button class="add_money">新規追加</button>
-  </a>
+  <div class="nav">
+    <a class="add_money" href="{{ url_for("add_money") }}">
+      新規追加
+    </a>
+    <a class="fa fa-cog fa-2x" href="{{ url_for("sys_config") }}"></a>
+  </div>
 
   {% for money in moneys[0] %}
   <div class="row">

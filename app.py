@@ -97,5 +97,9 @@ def add_money():
     return redirect(url_for("show_money"))
 
 
+@app.route("/sys_config", methods=["POST", "GET"])
+def sys_config():
+    return redirect(url_for("show_money"))
+
 if __name__ == "__main__":
     app.run()

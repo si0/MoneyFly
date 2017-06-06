@@ -10,6 +10,10 @@ a {
   text-decoration: none;
 }
 
+a:link, a:visited, a:hover, a:active {
+  color: #5d627b;
+}
+
 
 /***********************************
 / show_money.html
@@ -21,7 +25,7 @@ a {
   padding: 0.8em 1em;
   color: #5d627b;
   background: white;
-  border-top: 5px solid #5d627b;
+  border-top: 5px solid #4fa85d;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }
 
@@ -48,18 +52,34 @@ a {
   margin: 0 auto;
 }
 
+/* ----- ナビゲーション欄 ----- */
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
 /* ----- レコード新規追加ボタン ----- */
 .add_money {
-  display: block;
-  margin: 0 auto;
+  text-align: center;
   background: none;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-  width: 450px;
+  width: 420px;
   border: 4px solid #5d627b;
   padding: 0.5em 1em;
   color: #5d627b;
   font-size: 18px;
   margin-bottom: 40px;
+}
+
+/* ----- レコード新規追加ボタン ----- */
+.fa-cog {
+  border: 4px solid #5d627b;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+  margin-left: 5px;
+  width: 50px;
+  text-align: center;
+  padding-top: 7px;
+  height: 38px;
 }
 
 /* ----- 詳細表示項目 ----- */
@@ -76,11 +96,13 @@ a {
 ************************************/
 /* ----- 入力欄 ----- */
 .add_wrapper {
+  width: 470px;
   border-top: 15px solid #5d627b;
   border-radius: 3px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
   padding-top: 20px;
   padding-bottom: 50px;
+  margin: 0 auto;
  }
 
 .add_wrapper p {
@@ -95,9 +117,7 @@ a {
 
 .inp, .tarea {
   display: block;
-  width: 300px;
-  height: 30px;
-  font-size: 16px;
+  width: 300px; height: 30px; font-size: 16px;
   border: 0;
   border-bottom: 1px solid #5d627b;
   margin-bottom: 10px;
@@ -129,4 +149,19 @@ a {
   position: relative;
   box-shadow: 0 4px 0 #00991e;
   top: 3px;
+}
+
+.btn.back {
+  padding: 0 0 5px 0;
+  width: 90px;
+  text-align: center;
+  box-shadow: none;
+  background: none;
+  border: 0;
+  color: #5d627b;
+  border-bottom: 1px solid #00991e;
+}
+
+.btn.back:hover {
+  position: static;
 }
