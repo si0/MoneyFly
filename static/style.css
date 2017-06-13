@@ -71,7 +71,7 @@ a:link, a:visited, a:hover, a:active {
   margin-bottom: 40px;
 }
 
-/* ----- レコード新規追加ボタン ----- */
+/* ----- 設定ページのリンクボタン ----- */
 .fa-cog {
   border: 4px solid #5d627b;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
@@ -125,6 +125,7 @@ a:link, a:visited, a:hover, a:active {
   margin-bottom: 10px;
   opacity: 0.8;
   outline: 0;
+  background: none;
 }
 
 .tarea{

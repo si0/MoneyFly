@@ -1,0 +1,41 @@
+/***********************************
+/ show_money.html
+************************************/
+main {
+  padding: 0;
+  padding-top: 18px;
+}
+/* ----- レコード新規追加ボタン ----- */
+.add_money {
+  width: 60%;
+  font-size: 18px;
+  margin-bottom: 28px;
+}
+
+/* ----- 設定ページのリンクボタン ----- */
+.fa_cog {
+  width: 10%;
+}
+
+/* ----- 各支払い明細のwrapper ----- */
+.row {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  width: 80%;
+  padding: 0.8em 1em;
+}
+
+/***********************************
+/ add_money.html
+************************************/
+.add_wrapper {
+  width: 90%;
+}
+
+.inp, .tarea {
+  width: 95%;
+}
+
+.btn {
+  width: 80%;
+}
