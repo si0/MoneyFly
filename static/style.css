@@ -43,6 +43,15 @@ a:link, a:visited, a:hover, a:active {
   float: right;
 }
 
+/* ----- 合計金額表示項目 ----- */
+.summoney {
+  text-align: center;
+  margin: 0 auto;
+  border-bottom: 1px solid #ccc;
+  width: 200px;
+  color: #ccc;
+}
+
 /* ----- レコード詳細表示ボタン ----- */
 .open_tab {
   font-size: 18px;
