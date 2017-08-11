@@ -62,11 +62,14 @@ def show_money():
         else:
             note = row["note"]
 
+        # 日付のフォーマットを変更する
+        art_date = row["art_date"].strftime("%Y-%m-%d")
+
         moneys[0].append({"category": row["category"],
                           "money": row["money"],
                           "note": note,
-                          "art_date": row["art_date"]})
-
+                          "art_date": art_date})
+    
     # 合計使用額を取得
     row = g.db.execute("SELECT sum(money) FROM mf_money")
     moneys.append({"summoney": row.fetchone()[0]})
