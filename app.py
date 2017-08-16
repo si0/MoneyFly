@@ -48,6 +48,7 @@ def after_request(response):
 @app.route("/")
 def show_money():
     moneys = [[]]
+
     rows = g.db.execute("SELECT \
                          cate.category, money.money, money.note, money.art_date \
                          FROM mf_money money, mf_category cate \
@@ -69,12 +70,15 @@ def show_money():
                           "money": row["money"],
                           "note": note,
                           "art_date": art_date})
-    
+
     # 合計使用額を取得
-    row = g.db.execute("SELECT sum(money) FROM mf_money")
+    month = date.today().month
+    sql = text("SELECT sum(money) FROM mf_money WHERE date_part('month', art_date) = :tmonth")
+    row = g.db.execute(sql, tmonth = int(month))
+
     moneys.append({"summoney": row.fetchone()[0]})
 
-    return render_template("show_money.html", moneys=moneys)
+    return render_template("show_money.html", moneys=moneys, month=month)
 
 
 ############################################

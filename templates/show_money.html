@@ -11,7 +11,7 @@
     <a class="fa fa-cog fa-2x" href="{{ url_for("sys_config") }}"></a>
   </div>
 
-  <p class="summoney">合計: {{ moneys[1]["summoney"] }}円</p>
+  <p class="summoney">合計: {{ moneys[1]["summoney"] }}円/{{ month }}月</p>
 
   {% for money in moneys[0] %}
   <div class="row">
